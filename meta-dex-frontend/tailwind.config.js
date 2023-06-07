@@ -10,9 +10,6 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-
-    
-
     extend: {
       colors: {
         bgLight: "#FFFFFF",
@@ -24,6 +21,7 @@ module.exports = {
         cardLight: "#F3F4F7",
         cardDark: "#111318",
         primary: "#3D6EFF",
+        accent: "#D6E8FF",
         gray: "#191D24",
         grayLight: "#E7EAEE",
       },
