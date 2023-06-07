@@ -2,6 +2,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Navbar from "../components/navbar";
+import Container from "@/components/container";
 import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={theme}>
       <body className="bg-bgLight dark:bg-bgDark">
-        <Navbar setTheme={setTheme} theme={theme} />
-        {children}
+        <Container>
+          <Navbar setTheme={setTheme} theme={theme} />
+          {children}
+        </Container>
       </body>
     </html>
     // <html lang="en">

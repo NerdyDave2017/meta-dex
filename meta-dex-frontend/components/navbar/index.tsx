@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Light, Dark } from "../icons/icons";
+import Wallet from "./wallet";
 
 type NavbarProps = {
   theme: string;
@@ -9,6 +10,8 @@ type NavbarProps = {
 };
 
 const NavbarComponent = ({ theme, setTheme }: NavbarProps) => {
+  const [showWallet, setShowWallet] = useState(false);
+
   return (
     <div className="w-full flex justify-between h-20 py- px-10">
       <div className="flex space-x-10">
@@ -33,22 +36,23 @@ const NavbarComponent = ({ theme, setTheme }: NavbarProps) => {
         </div>
       </div>
       <div className="flex space-x-5 self-center">
-        <button className="bg-primary text-textDark rounded-xl px-5 py-3">
-          Connect Wallet
-        </button>
-        <div className="self-center">
+        <div className="self-center text-mutedLight dark:text-mutedDark   cursor-pointer hover:text-primary dark:hover:text-primary ">
           {theme == "dark" ? (
-            <Light
-              onClick={() => setTheme("light")}
-              className="text-mutedLight dark:text-mutedDark  w-6 cursor-pointer hover:text-primary dark:hover:text-primary"
-            />
+            <Light onClick={() => setTheme("light")} className="w-6" />
           ) : (
-            <Dark
-              onClick={() => setTheme("dark")}
-              className="text-mutedLight dark:text-mutedDark w-6 cursor-pointer hover:text-primary dark:hover:text-primary"
-            />
+            <Dark onClick={() => setTheme("dark")} className="w-6" />
           )}
         </div>
+        {showWallet ? (
+          <Wallet />
+        ) : (
+          <button
+            onClick={() => setShowWallet(true)}
+            className="bg-primary text-textDark rounded-xl px-5 py-3"
+          >
+            Connect Wallet
+          </button>
+        )}
       </div>
     </div>
   );
