@@ -36,15 +36,8 @@ const NavbarComponent = ({ theme, setTheme }: NavbarProps) => {
         </div>
       </div>
       <div className="flex space-x-5 self-center">
-        <div className="self-center text-mutedLight dark:text-mutedDark   cursor-pointer hover:text-primary dark:hover:text-primary ">
-          {theme == "dark" ? (
-            <Light onClick={() => setTheme("light")} className="w-6" />
-          ) : (
-            <Dark onClick={() => setTheme("dark")} className="w-6" />
-          )}
-        </div>
         {showWallet ? (
-          <Wallet />
+          <Wallet setShowWallet={setShowWallet} />
         ) : (
           <button
             onClick={() => setShowWallet(true)}
@@ -53,6 +46,14 @@ const NavbarComponent = ({ theme, setTheme }: NavbarProps) => {
             Connect Wallet
           </button>
         )}
+
+        <div className="self-center text-mutedLight dark:text-mutedDark   cursor-pointer hover:text-primary dark:hover:text-primary ">
+          {theme == "dark" ? (
+            <Light onClick={() => setTheme("light")} className="w-6" />
+          ) : (
+            <Dark onClick={() => setTheme("dark")} className="w-6" />
+          )}
+        </div>
       </div>
     </div>
   );

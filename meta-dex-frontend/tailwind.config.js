@@ -1,3 +1,5 @@
+const { gray } = require('tailwindcss/colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
@@ -22,7 +24,8 @@ module.exports = {
         cardLight: "#F3F4F7",
         cardDark: "#111318",
         primary: "#3D6EFF",
-        gray: "#191D24"
+        gray: "#191D24",
+        grayLight: "#E7EAEE",
       },
     },
   },
