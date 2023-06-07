@@ -1,16 +1,22 @@
-"use client";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { Light, Dark } from "../icons/icons";
 
-const NavbarComponent = () => {
+type NavbarProps = {
+  theme: string;
+  setTheme: (theme: string) => void;
+};
+
+const NavbarComponent = ({ theme, setTheme }: NavbarProps) => {
   return (
     <div className="w-full flex justify-between h-20 py- px-10">
-      <div className="flex">
+      <div className="flex space-x-10">
         <span className="self-center whitespace-nowrap text-2xl font-semibold text-primary">
           <Link href="/">metaDEX</Link>
         </span>
         <div className="self-center">
-          <ul className="inline-flex space-x-10 mx-10 text-mutedLight dark:text-mutedDark ">
+          <ul className="inline-flex space-x-10  text-mutedLight dark:text-mutedDark">
             <li className="hover:text-primary dark:hover:text-primary">
               <Link href="/swap">Swap</Link>
             </li>
@@ -26,10 +32,23 @@ const NavbarComponent = () => {
           </ul>
         </div>
       </div>
-      <div className="flex self-center">
-        <button className="bg-primary text-textDark rounded-md px-5 py-3">
+      <div className="flex space-x-5 self-center">
+        <button className="bg-primary text-textDark rounded-xl px-5 py-3">
           Connect Wallet
         </button>
+        <div className="self-center">
+          {theme == "dark" ? (
+            <Light
+              onClick={() => setTheme("light")}
+              className="text-mutedLight dark:text-mutedDark  w-6 cursor-pointer hover:text-primary dark:hover:text-primary"
+            />
+          ) : (
+            <Dark
+              onClick={() => setTheme("dark")}
+              className="text-mutedLight dark:text-mutedDark w-6 cursor-pointer hover:text-primary dark:hover:text-primary"
+            />
+          )}
+        </div>
       </div>
     </div>
   );
