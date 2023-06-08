@@ -13,6 +13,7 @@ const Swap = () => {
   return (
     <div className="w-full h-[calc(100vh-86px)] flex items-center justify-center">
       <Card className="w-[546px] h-auto px-5 py-8 flex-col space-y-7">
+        {/* Swap heading and settings */}
         <div className="w-full flex justify-between">
           <div className="whitespace-nowrap text-2xl font-semibold text-textLight dark:text-textDark">
             Swap
@@ -21,7 +22,9 @@ const Swap = () => {
           <Settings className="w-8 text-textLight dark:text-textDark cursor-pointer" />
         </div>
 
+        {/* Swap Tokens Container */}
         <div className="flex-col space-y-3 relative">
+          {/* Swap From Token */}
           <div className="w-full h-[150px] border-grayLight dark:border-gray border-2 rounded-xl flex px-5 py-3 space-x-3">
             <div className="flex-col">
               <div className="text-mutedLight font-semibold dark:text-mutedDark">
@@ -53,6 +56,8 @@ const Swap = () => {
               </div>
             </div>
           </div>
+
+          {/* Swap To Token */}
           <div className="w-full h-[150px] border-grayLight dark:border-gray border-2 rounded-xl flex px-5 py-3 space-x-3">
             <div className="flex-col">
               <div className="text-mutedLight font-semibold dark:text-mutedDark">
@@ -85,11 +90,13 @@ const Swap = () => {
             </div>
           </div>
 
+          {/* Alternator */}
           <div className="bg-accent dark:bg-accentDark rounded-xl p-4 box-content w-auto absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-70%]">
             <ArrowsUpDown className="w-6 text-primary" />
           </div>
         </div>
 
+        {/* Swap Button */}
         <button className="bg-primary text-textDark rounded-xl px-5 py-3 w-full">
           Swap
         </button>
