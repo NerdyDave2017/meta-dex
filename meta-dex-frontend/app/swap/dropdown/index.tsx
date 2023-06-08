@@ -3,9 +3,11 @@ import Card from "@/components/card";
 
 type props = {
   className?: string;
+  handleSelectToken?: (token: string) => void;
+  data?: object;
 };
 
-const Dropdown = ({ className }: props) => {
+const Dropdown = ({ className, handleSelectToken, data }: props) => {
   return (
     <Card
       className={
@@ -14,13 +16,13 @@ const Dropdown = ({ className }: props) => {
         className
       }
     >
-      <div className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-1 py-2 space-x-3 text-textLight dark:text-textDark items-center justify-center">
+      <div className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-1 py-2 space-x-3 text-mutedLight dark:text-mutedDark items-center justify-center">
         USDT
       </div>
-      <div className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-1 py-2 space-x-3 text-textLight dark:text-textDark items-center justify-center">
+      <div className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-1 py-2 space-x-3 text-mutedLight dark:text-mutedDark items-center justify-center">
         USDC
       </div>
-      <div className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-1 py-2 space-x-3 text-textLight dark:text-textDark items-center justify-center">
+      <div className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-1 py-2 space-x-3 text-mutedLight dark:text-mutedDark items-center justify-center">
         DAI
       </div>
     </Card>
