@@ -16,7 +16,7 @@ const NavbarComponent = ({ theme, setTheme }: NavbarProps) => {
     <div className="w-full flex justify-between h-20 py- px-10">
       <div className="flex space-x-10">
         <span className="self-center whitespace-nowrap text-2xl font-semibold text-primary">
-          <Link href="/">metaDEX</Link>
+          <Link href="/">METADEX</Link>
         </span>
         <div className="self-center">
           <ul className="inline-flex space-x-10  text-mutedLight dark:text-mutedDark">
