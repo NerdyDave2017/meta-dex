@@ -1,5 +1,8 @@
 import React from "react";
 import Card from "@/components/card";
+
+import Dropdown from "./dropdown";
+
 import {
   Settings,
   ArrowsUpDown,
@@ -47,12 +50,13 @@ const Swap = () => {
               {/* <div className="text-textLight dark:text-textDark font-bold cursor-pointer">
                 Max
               </div> */}
-              <div className="flex justify-center items-center space-x-1 cursor-pointer">
+              <div className="flex justify-center items-center space-x-1 cursor-pointer relative">
                 <Usdt className="w-8" />
                 <div className="text-xl text-textLight dark:text-textDark">
                   USDT
                 </div>
                 <ArrowDown className="w-6 text-textLight dark:text-textDark" />
+                <Dropdown className="absolute top-[calc(100%+10px)]" />
               </div>
             </div>
           </div>
@@ -76,22 +80,23 @@ const Swap = () => {
               </div>
             </div>
 
-            <div className="flex space-y-5 justify-end items-center w-auto h-full ">
+            <div className="flex space-y-5 justify-end items-center w-auto h-full">
               {/* <div className="text-textLight dark:text-textDark font-bold cursor-pointer">
                 Max
               </div> */}
-              <div className="flex justify-center items-center space-x-1 cursor-pointer">
+              <div className="flex justify-center items-center space-x-1 cursor-pointer relative">
                 <Usdc className="w-8" />
                 <div className="text-xl text-textLight dark:text-textDark">
                   USDC
                 </div>
                 <ArrowDown className="w-6 text-textLight dark:text-textDark" />
+                <Dropdown className="absolute top-[calc(100%+10px)]" />
               </div>
             </div>
           </div>
 
           {/* Alternator */}
-          <div className="bg-accent dark:bg-accentDark rounded-xl p-4 box-content w-auto absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-70%]">
+          <div className="bg-accent dark:bg-accentDark rounded-xl p-4 box-content w-auto absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-70%] cursor-pointer">
             <ArrowsUpDown className="w-6 text-primary" />
           </div>
         </div>
