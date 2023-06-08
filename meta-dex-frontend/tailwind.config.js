@@ -22,6 +22,7 @@ module.exports = {
         cardDark: "#111318",
         primary: "#3D6EFF",
         accent: "#D6E8FF",
+        accentDark: "#9EC9FF",
         gray: "#191D24",
         grayLight: "#E7EAEE",
       },

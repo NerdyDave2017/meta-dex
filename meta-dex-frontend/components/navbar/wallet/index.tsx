@@ -10,7 +10,7 @@ const Wallet = ({ setShowWallet }: props) => {
     <div className="flex space-x-3">
       <div className="flex items-center  px-3 py-1 rounded-xl bg-grayLight dark:bg-gray text-textLight dark:text-textDark space-x-2">
         <Logo className="w-4" />
-        <div className="">Ethereum</div>
+        <div className="cursor-pointer">Ethereum</div>
       </div>
 
       <div className="flex items-center justify-center space-x-3 px-3 pr-1 py-1 rounded-xl bg-grayLight dark:bg-gray">
