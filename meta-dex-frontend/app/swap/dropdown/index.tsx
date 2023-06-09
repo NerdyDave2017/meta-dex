@@ -51,10 +51,17 @@ const Dropdown = ({
       }
     >
       {data?.map((token: token, key) => {
+        // condition to prevent rendering of already selected token
+        const fromCondition = type === "from" && token.name === toToken;
+        const toCondition = type === "to" && token.name === fromToken;
+
         if (
           (type == "from" && token.name == fromToken) ||
           (type == "to" && token.name == toToken)
         ) {
+          return;
+        }
+        if (fromCondition || toCondition) {
           return;
         } else {
           return (
