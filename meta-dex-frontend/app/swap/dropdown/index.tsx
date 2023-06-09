@@ -67,7 +67,7 @@ const Dropdown = ({
           return (
             <div
               key={key}
-              className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex pl-6 py-2 space-x-2 text-mutedLight dark:text-mutedDark items-center"
+              className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-2 py-2 space-x-2 text-mutedLight dark:text-mutedDark items-center justify-center"
               onClick={() => handleSelectToken(token.name, token.icon, type)}
             >
               <div className="w-6">{token.icon}</div>
