@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import Card from "@/components/card";
 
@@ -12,7 +13,46 @@ import {
   Dai,
 } from "@/components/icons/icons";
 
+const tokens = [
+  {
+    icon: <Usdt className="w-6" />,
+    name: "USDT",
+  },
+  {
+    icon: <Usdc className="w-6" />,
+    name: "USDC",
+  },
+  {
+    icon: <Dai className="w-6" />,
+    name: "DAI",
+  },
+];
+
 const Swap = () => {
+  const [fromToken, setFromToken] = useState("USDT");
+  const [toToken, setToToken] = useState("USDC");
+
+  const [tokenSelector, showTokenSelector] = useState({
+    from: false,
+    to: false,
+  });
+
+  const handleSelectToken = (token: string, type: string) => {
+    if (type === "from") {
+      setFromToken(token);
+    } else {
+      setToToken(token);
+    }
+  };
+
+  const handleShowTokenSelector = (type: string) => {
+    if (type === "from") {
+      showTokenSelector({ from: !tokenSelector.from, to: false });
+    } else {
+      showTokenSelector({ from: false, to: !tokenSelector.to });
+    }
+  };
+
   return (
     <div className="w-full h-[calc(100vh-86px)] flex items-center justify-center">
       <Card className="w-[546px] h-auto px-5 py-8 flex-col space-y-7">
@@ -50,13 +90,21 @@ const Swap = () => {
               {/* <div className="text-textLight dark:text-textDark font-bold cursor-pointer">
                 Max
               </div> */}
-              <div className="flex justify-center items-center space-x-1 cursor-pointer relative">
+              <div
+                className="flex justify-center items-center space-x-1 cursor-pointer relative"
+                onClick={() => handleShowTokenSelector("from")}
+              >
                 <Usdt className="w-8" />
                 <div className="text-xl text-textLight dark:text-textDark">
                   USDT
                 </div>
                 <ArrowDown className="w-6 text-textLight dark:text-textDark" />
-                <Dropdown className="absolute top-[calc(100%+10px)]" />
+                {tokenSelector.from && (
+                  <Dropdown
+                    className="absolute top-[calc(100%+10px)]"
+                    data={tokens}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -84,13 +132,21 @@ const Swap = () => {
               {/* <div className="text-textLight dark:text-textDark font-bold cursor-pointer">
                 Max
               </div> */}
-              <div className="flex justify-center items-center space-x-1 cursor-pointer relative">
+              <div
+                className="flex justify-center items-center space-x-1 cursor-pointer relative"
+                onClick={() => handleShowTokenSelector("to")}
+              >
                 <Usdc className="w-8" />
                 <div className="text-xl text-textLight dark:text-textDark">
                   USDC
                 </div>
                 <ArrowDown className="w-6 text-textLight dark:text-textDark" />
-                <Dropdown className="absolute top-[calc(100%+10px)]" />
+                {tokenSelector.to && (
+                  <Dropdown
+                    className="absolute top-[calc(100%+10px)]"
+                    data={tokens}
+                  />
+                )}
               </div>
             </div>
           </div>

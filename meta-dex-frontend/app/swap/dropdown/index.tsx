@@ -4,8 +4,13 @@ import Card from "@/components/card";
 type props = {
   className?: string;
   handleSelectToken?: (token: string) => void;
-  data?: object;
+  data: Array<token>;
 };
+
+interface token {
+  icon: React.ReactNode;
+  name: string;
+}
 
 const Dropdown = ({ className, handleSelectToken, data }: props) => {
   return (
@@ -16,15 +21,15 @@ const Dropdown = ({ className, handleSelectToken, data }: props) => {
         className
       }
     >
-      <div className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-1 py-2 space-x-3 text-mutedLight dark:text-mutedDark items-center justify-center">
-        USDT
-      </div>
-      <div className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-1 py-2 space-x-3 text-mutedLight dark:text-mutedDark items-center justify-center">
-        USDC
-      </div>
-      <div className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-1 py-2 space-x-3 text-mutedLight dark:text-mutedDark items-center justify-center">
-        DAI
-      </div>
+      {data?.map((token: token, key) => (
+        <div
+          key={key}
+          className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-1 py-2 space-x-2 text-mutedLight dark:text-mutedDark items-center justify-items-start"
+        >
+          {token.icon}
+          <span>{token.name}</span>
+        </div>
+      ))}
     </Card>
   );
 };
