@@ -14,13 +14,8 @@ import {
   Dai,
 } from "@/components/icons/icons";
 
-interface token {
-  icon: React.ReactNode;
-  name: string;
-}
-
 const Swap = () => {
-  const [fromTokenName, setFromName] = useState("USDT");
+  const [fromTokenName, setFromTokenName] = useState("USDT");
   const [toTokenName, setToTokenName] = useState("USDC");
 
   const [fromTokenIcon, setFromTokenIcon] = useState(<Usdt />);
@@ -37,7 +32,7 @@ const Swap = () => {
     type: string
   ) => {
     if (type === "from") {
-      setFromName(name);
+      setFromTokenName(name);
       setFromTokenIcon(icon);
     } else {
       setToTokenName(name);
@@ -55,8 +50,13 @@ const Swap = () => {
 
   const handleAlternator = () => {
     const tempName = fromTokenName;
+    const tempIcon = fromTokenIcon;
 
-    setFromName;
+    setFromTokenName(toTokenName);
+    setFromTokenIcon(toTokenIcon);
+
+    setToTokenName(tempName);
+    setToTokenIcon(tempIcon);
   };
 
   return (
@@ -174,7 +174,10 @@ const Swap = () => {
           </div>
 
           {/* Alternator */}
-          <div className="bg-accent dark:bg-accentDark rounded-xl p-4 box-content w-auto absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-70%] cursor-pointer">
+          <div
+            className="bg-accent dark:bg-accentDark rounded-xl p-4 box-content w-auto absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-70%] cursor-pointer"
+            onClick={handleAlternator}
+          >
             <ArrowsUpDown className="w-6 text-primary" />
           </div>
         </div>
