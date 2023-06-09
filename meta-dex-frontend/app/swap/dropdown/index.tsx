@@ -10,8 +10,8 @@ type props = {
     icon: React.JSX.Element,
     type: string
   ) => void;
-  fromToken?: string;
-  toToken?: string;
+  fromTokenName?: string;
+  toTokenName?: string;
   type: string;
 };
 
@@ -38,8 +38,8 @@ const data = [
 const Dropdown = ({
   className,
   handleSelectToken,
-  fromToken,
-  toToken,
+  fromTokenName,
+  toTokenName,
   type,
 }: props) => {
   return (
@@ -52,12 +52,12 @@ const Dropdown = ({
     >
       {data?.map((token: token, key) => {
         // condition to prevent rendering of already selected token
-        const fromCondition = type === "from" && token.name === toToken;
-        const toCondition = type === "to" && token.name === fromToken;
+        const fromCondition = type === "from" && token.name === toTokenName;
+        const toCondition = type === "to" && token.name === fromTokenName;
 
         if (
-          (type == "from" && token.name == fromToken) ||
-          (type == "to" && token.name == toToken)
+          (type == "from" && token.name == fromTokenName) ||
+          (type == "to" && token.name == toTokenName)
         ) {
           return;
         }

@@ -20,11 +20,11 @@ interface token {
 }
 
 const Swap = () => {
-  const [fromToken, setFromToken] = useState("USDT");
-  const [toToken, setToToken] = useState("USDC");
+  const [fromTokenName, setFromName] = useState("USDT");
+  const [toTokenName, setToTokenName] = useState("USDC");
 
-  const [fromIcon, setFromIcon] = useState(<Usdt />);
-  const [toIcon, setToIcon] = useState(<Usdc />);
+  const [fromTokenIcon, setFromTokenIcon] = useState(<Usdt />);
+  const [toTokenIcon, setToTokenIcon] = useState(<Usdc />);
 
   const [tokenSelector, showTokenSelector] = useState({
     from: false,
@@ -32,16 +32,16 @@ const Swap = () => {
   });
 
   const handleSelectToken = (
-    token: string,
+    name: string,
     icon: React.JSX.Element,
     type: string
   ) => {
     if (type === "from") {
-      setFromToken(token);
-      setFromIcon(icon);
+      setFromName(name);
+      setFromTokenIcon(icon);
     } else {
-      setToToken(token);
-      setToIcon(icon);
+      setToTokenName(name);
+      setToTokenIcon(icon);
     }
   };
 
@@ -51,6 +51,12 @@ const Swap = () => {
     } else {
       showTokenSelector({ from: false, to: !tokenSelector.to });
     }
+  };
+
+  const handleAlternator = () => {
+    const tempName = fromTokenName;
+
+    setFromName;
   };
 
   return (
@@ -94,9 +100,9 @@ const Swap = () => {
                 className="flex justify-center items-center space-x-1 cursor-pointer relative"
                 onClick={() => handleShowTokenSelector("from")}
               >
-                <div className="w-8">{fromIcon}</div>
+                <div className="w-8">{fromTokenIcon}</div>
                 <div className="text-xl text-textLight dark:text-textDark">
-                  {fromToken}
+                  {fromTokenName}
                 </div>
 
                 {tokenSelector.from ? (
@@ -108,8 +114,8 @@ const Swap = () => {
                 {tokenSelector.from && (
                   <Dropdown
                     className="absolute top-[calc(100%+10px)]"
-                    fromToken={fromToken}
-                    toToken={toToken}
+                    fromTokenName={fromTokenName}
+                    toTokenName={toTokenName}
                     type="from"
                     handleSelectToken={handleSelectToken}
                   />
@@ -145,9 +151,9 @@ const Swap = () => {
                 className="flex justify-center items-center space-x-1 cursor-pointer relative"
                 onClick={() => handleShowTokenSelector("to")}
               >
-                <div className="w-8">{toIcon}</div>
+                <div className="w-8">{toTokenIcon}</div>
                 <div className="text-xl text-textLight dark:text-textDark">
-                  {toToken}
+                  {toTokenName}
                 </div>
                 {tokenSelector.to ? (
                   <ArrowUp className="w-6 text-textLight dark:text-textDark" />
@@ -157,8 +163,8 @@ const Swap = () => {
                 {tokenSelector.to && (
                   <Dropdown
                     className="absolute top-[calc(100%+10px)]"
-                    fromToken={fromToken}
-                    toToken={toToken}
+                    fromTokenName={fromTokenName}
+                    toTokenName={toTokenName}
                     type="to"
                     handleSelectToken={handleSelectToken}
                   />
