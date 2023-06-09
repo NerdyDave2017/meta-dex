@@ -8,6 +8,7 @@ import {
   Settings,
   ArrowsUpDown,
   ArrowDown,
+  ArrowUp,
   Usdt,
   Usdc,
   Dai,
@@ -98,7 +99,13 @@ const Swap = () => {
                 <div className="text-xl text-textLight dark:text-textDark">
                   USDT
                 </div>
-                <ArrowDown className="w-6 text-textLight dark:text-textDark" />
+
+                {tokenSelector.from ? (
+                  <ArrowUp className="w-6 text-textLight dark:text-textDark" />
+                ) : (
+                  <ArrowDown className="w-6 text-textLight dark:text-textDark" />
+                )}
+
                 {tokenSelector.from && (
                   <Dropdown
                     className="absolute top-[calc(100%+10px)]"
@@ -140,7 +147,11 @@ const Swap = () => {
                 <div className="text-xl text-textLight dark:text-textDark">
                   USDC
                 </div>
-                <ArrowDown className="w-6 text-textLight dark:text-textDark" />
+                {tokenSelector.to ? (
+                  <ArrowUp className="w-6 text-textLight dark:text-textDark" />
+                ) : (
+                  <ArrowDown className="w-6 text-textLight dark:text-textDark" />
+                )}
                 {tokenSelector.to && (
                   <Dropdown
                     className="absolute top-[calc(100%+10px)]"

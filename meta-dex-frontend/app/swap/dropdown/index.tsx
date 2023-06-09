@@ -24,10 +24,10 @@ const Dropdown = ({ className, handleSelectToken, data }: props) => {
       {data?.map((token: token, key) => (
         <div
           key={key}
-          className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex px-1 py-2 space-x-2 text-mutedLight dark:text-mutedDark items-center justify-items-start"
+          className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex pl-6 py-2 space-x-2 text-mutedLight dark:text-mutedDark items-center"
         >
-          {token.icon}
-          <span>{token.name}</span>
+          <div className="">{token.icon}</div>
+          <span className="self-center">{token.name}</span>
         </div>
       ))}
     </Card>
