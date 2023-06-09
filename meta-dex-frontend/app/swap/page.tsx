@@ -14,35 +14,34 @@ import {
   Dai,
 } from "@/components/icons/icons";
 
-const tokens = [
-  {
-    icon: <Usdt />,
-    name: "USDT",
-  },
-  {
-    icon: <Usdc className="w-6" />,
-    name: "USDC",
-  },
-  {
-    icon: <Dai className="w-6" />,
-    name: "DAI",
-  },
-];
+interface token {
+  icon: React.ReactNode;
+  name: string;
+}
 
 const Swap = () => {
   const [fromToken, setFromToken] = useState("USDT");
   const [toToken, setToToken] = useState("USDC");
+
+  const [fromIcon, setFromIcon] = useState(<Usdt />);
+  const [toIcon, setToIcon] = useState(<Usdc />);
 
   const [tokenSelector, showTokenSelector] = useState({
     from: false,
     to: false,
   });
 
-  const handleSelectToken = (token: string, type: string) => {
+  const handleSelectToken = (
+    token: string,
+    icon: React.JSX.Element,
+    type: string
+  ) => {
     if (type === "from") {
       setFromToken(token);
+      setFromIcon(icon);
     } else {
       setToToken(token);
+      setToIcon(icon);
     }
   };
 
@@ -95,7 +94,7 @@ const Swap = () => {
                 className="flex justify-center items-center space-x-1 cursor-pointer relative"
                 onClick={() => handleShowTokenSelector("from")}
               >
-                <Usdt className="w-8" />
+                <div className="w-8">{fromIcon}</div>
                 <div className="text-xl text-textLight dark:text-textDark">
                   {fromToken}
                 </div>
@@ -109,7 +108,6 @@ const Swap = () => {
                 {tokenSelector.from && (
                   <Dropdown
                     className="absolute top-[calc(100%+10px)]"
-                    data={tokens}
                     fromToken={fromToken}
                     toToken={toToken}
                     type="from"
@@ -147,9 +145,9 @@ const Swap = () => {
                 className="flex justify-center items-center space-x-1 cursor-pointer relative"
                 onClick={() => handleShowTokenSelector("to")}
               >
-                <Usdc className="w-8" />
+                <div className="w-8">{toIcon}</div>
                 <div className="text-xl text-textLight dark:text-textDark">
-                  USDC
+                  {toToken}
                 </div>
                 {tokenSelector.to ? (
                   <ArrowUp className="w-6 text-textLight dark:text-textDark" />
@@ -159,7 +157,6 @@ const Swap = () => {
                 {tokenSelector.to && (
                   <Dropdown
                     className="absolute top-[calc(100%+10px)]"
-                    data={tokens}
                     fromToken={fromToken}
                     toToken={toToken}
                     type="to"
