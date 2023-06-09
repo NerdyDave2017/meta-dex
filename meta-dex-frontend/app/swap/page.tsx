@@ -16,7 +16,7 @@ import {
 
 const tokens = [
   {
-    icon: <Usdt className="w-6" />,
+    icon: <Usdt />,
     name: "USDT",
   },
   {
@@ -97,7 +97,7 @@ const Swap = () => {
               >
                 <Usdt className="w-8" />
                 <div className="text-xl text-textLight dark:text-textDark">
-                  USDT
+                  {fromToken}
                 </div>
 
                 {tokenSelector.from ? (
@@ -110,6 +110,10 @@ const Swap = () => {
                   <Dropdown
                     className="absolute top-[calc(100%+10px)]"
                     data={tokens}
+                    fromToken={fromToken}
+                    toToken={toToken}
+                    type="from"
+                    handleSelectToken={handleSelectToken}
                   />
                 )}
               </div>
@@ -156,6 +160,10 @@ const Swap = () => {
                   <Dropdown
                     className="absolute top-[calc(100%+10px)]"
                     data={tokens}
+                    fromToken={fromToken}
+                    toToken={toToken}
+                    type="to"
+                    handleSelectToken={handleSelectToken}
                   />
                 )}
               </div>

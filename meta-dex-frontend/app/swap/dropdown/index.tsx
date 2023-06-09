@@ -3,8 +3,11 @@ import Card from "@/components/card";
 
 type props = {
   className?: string;
-  handleSelectToken?: (token: string) => void;
+  handleSelectToken: (token: string, type: string) => void;
   data: Array<token>;
+  fromToken?: string;
+  toToken?: string;
+  type: string;
 };
 
 interface token {
@@ -12,7 +15,14 @@ interface token {
   name: string;
 }
 
-const Dropdown = ({ className, handleSelectToken, data }: props) => {
+const Dropdown = ({
+  className,
+  handleSelectToken,
+  data,
+  fromToken,
+  toToken,
+  type,
+}: props) => {
   return (
     <Card
       className={
@@ -21,15 +31,25 @@ const Dropdown = ({ className, handleSelectToken, data }: props) => {
         className
       }
     >
-      {data?.map((token: token, key) => (
-        <div
-          key={key}
-          className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex pl-6 py-2 space-x-2 text-mutedLight dark:text-mutedDark items-center"
-        >
-          <div className="">{token.icon}</div>
-          <span className="self-center">{token.name}</span>
-        </div>
-      ))}
+      {data?.map((token: token, key) => {
+        if (
+          (type == "from" && token.name == fromToken) ||
+          (type == "to" && token.name == toToken)
+        ) {
+          return;
+        } else {
+          return (
+            <div
+              key={key}
+              className="w-full border-grayLight dark:border-gray border-2 rounded-xl flex pl-6 py-2 space-x-2 text-mutedLight dark:text-mutedDark items-center"
+              onClick={() => handleSelectToken(token.name, type)}
+            >
+              <div className="w-6">{token.icon}</div>
+              <span className="self-center">{token.name}</span>
+            </div>
+          );
+        }
+      })}
     </Card>
   );
 };
