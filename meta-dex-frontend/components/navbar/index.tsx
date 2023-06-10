@@ -24,13 +24,10 @@ const NavbarComponent = ({ theme, setTheme }: NavbarProps) => {
               <Link href="/swap">Swap</Link>
             </li>
             <li className="hover:text-primary dark:hover:text-primary">
-              <Link href="/bridge">Bridge</Link>
-            </li>
-            <li className="hover:text-primary dark:hover:text-primary">
               <Link href="/pool">Pool</Link>
             </li>
             <li className="hover:text-primary dark:hover:text-primary">
-              <Link href="/explorer">Explorer</Link>s
+              <Link href="/explorer">Explorer</Link>
             </li>
           </ul>
         </div>
