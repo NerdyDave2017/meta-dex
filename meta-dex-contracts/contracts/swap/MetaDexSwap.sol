@@ -43,7 +43,7 @@ contract MetaDexSwap is MetaDexHelpers {
 
         // Decode swap data
         (
-            uint256 _amountIn,
+            uint256 _amount,
             uint256 _fee,
             uint256 _nonce,
             bytes8 _outChain,

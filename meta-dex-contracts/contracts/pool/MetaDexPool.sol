@@ -53,11 +53,33 @@ contract MetaDexPool is MetaDexState, Context {
         require(token.transfer(address(this), _amount), "Transaction failed");
     }
 
+    // Lock on target chain on swap request
     function lock(
         uint256 _encodedSwap,
         bytes32 r,
         bytes32 s,
         uint8 v,
         address _initiator
+    ) external returns (bytes32 swapId) {}
+
+    // Unlock locked fund
+    function unlock(
+        uint256 _encodedSwap,
+        bytes32 r,
+        bytes32 s,
+        uint8 v,
+        address _initiator,
+        bytes32 swapId
+    ) external {}
+
+    // Release locked funds to recipient
+    function release(
+        uint256 _encodedSwap,
+        bytes32 r,
+        bytes32 s,
+        uint8 v,
+        address _initiator,
+        address _recipient,
+        bytes32 swapId
     ) external {}
 }
