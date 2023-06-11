@@ -77,7 +77,7 @@ contract MetaDexPool is MetaDexState, MetaDexHelpers, Context {
         bytes32 s,
         uint8 v,
         address _initiator
-    ) external returns (bytes32 swapId) {}
+    ) external onlyAdmin {}
 
     // Unlock locked fund
     function unlock(
@@ -87,7 +87,7 @@ contract MetaDexPool is MetaDexState, MetaDexHelpers, Context {
         uint8 v,
         address _initiator,
         bytes32 swapId
-    ) external {}
+    ) external onlyAdmin {}
 
     // Release locked funds to recipient
     function release(
@@ -97,5 +97,5 @@ contract MetaDexPool is MetaDexState, MetaDexHelpers, Context {
         uint8 v,
         address _initiator,
         address _recipient
-    ) external {}
+    ) external onlyAdmin {}
 }
