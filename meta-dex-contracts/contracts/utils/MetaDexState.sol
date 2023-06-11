@@ -5,6 +5,8 @@ contract MetaDexState {
     uint256 minimumLockDuration = 30 * 1 days;
     uint256 minimumAmount = 1000 * 10 ** 8; // token decimals will be in 10 ** 8
 
+    uint256 balanceOfPoolToken; // amount of pool tokens in the pool
+
     mapping(address => bool) isLiquidityProvider; // Address of LPs
     mapping(address => uint256) lockedAmount; // Amount locked in the pool by LPs
     mapping(address => uint256) lockDuration; // Lock duration of each lp

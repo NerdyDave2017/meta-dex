@@ -52,4 +52,12 @@ contract MetaDexPool is MetaDexState, Context {
 
         require(token.transfer(address(this), _amount), "Transaction failed");
     }
+
+    function lock(
+        uint256 _encodedSwap,
+        bytes32 r,
+        bytes32 s,
+        uint8 v,
+        address _initiator
+    ) external {}
 }

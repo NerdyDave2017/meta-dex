@@ -4,15 +4,16 @@ pragma solidity 0.8.18;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "../utils/MetaDexHelpers.sol";
 import "../utils/MetaDexState.sol";
+import "../pool/MetaDexPool.sol";
 
 contract MetaDexSwap is MetaDexHelpers {
     // On chain pools
-    IERC20 USDT_POOL;
-    IERC20 USDC_POOL;
+    MetaDexPool USDT_POOL;
+    MetaDexPool USDC_POOL;
 
     constructor(address _usdt, address _usdc) {
-        USDT_POOL = IERC20(_usdt);
-        USDC_POOL = IERC20(_usdc);
+        USDT_POOL = MetaDexPool(_usdt);
+        USDC_POOL = MetaDexPool(_usdc);
     }
 
     /**
@@ -25,18 +26,18 @@ contract MetaDexSwap is MetaDexHelpers {
      * @param r r value of the swap signature
      * @param s s value of the swap signature
      * @param v v value of the swap signature
-     * @param _signer address of swap initiator
+     * @param _initiator address of swap initiator
      */
     function executeSwap(
         uint256 _encodedSwap,
         bytes32 r,
         bytes32 s,
         uint8 v,
-        address _signer
+        address _initiator
     ) external {
         // Verify signature
         require(
-            _verifySignature(_encodedSwap, r, s, v, _signer),
+            _verifySignature(_encodedSwap, r, s, v, _initiator),
             "MetaDexSwap: Invalid signature"
         );
 
