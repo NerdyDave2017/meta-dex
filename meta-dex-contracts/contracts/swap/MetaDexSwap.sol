@@ -37,18 +37,15 @@ contract MetaDexSwap is MetaDexHelpers, MetaDexState {
 
         // Decode swap data
         (
-            address _tokenIn,
-            address _tokenOut,
             uint256 _amountIn,
-            uint256 _amountOut,
-            uint256 _deadline
-        ) = abi.decode(
-                (abi.encodePacked(_encodedSwap)),
-                (address, address, uint256, uint256, uint256)
-            );
+            uint256 _fee,
+            uint256 _nonce,
+            bytes8 _outChain,
+            bytes8 _inChain,
+            address _tokenIn,
 
-        // Transfer funds from user to MetaDexSwap contract
-        IERC20(_tokenIn).transferFrom(_signer, address(this), _amountIn);
+        ) = _decodeSwapData(_encodedSwap);
+        // Transfer funds from user to MetaDexPool contract for tokenIn
 
         // Execute swap
         // Check MetaDexState to see if pool exists

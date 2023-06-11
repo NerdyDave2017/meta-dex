@@ -28,16 +28,19 @@ contract MetaDexHelpers {
         internal
         pure
         returns (
+            uint256 _amount,
+            uint256 _fee,
+            uint256 _nonce,
+            bytes8 _outChain,
+            bytes8 _inChain,
             address _tokenIn,
-            address _tokenOut,
-            uint256 _amountIn,
-            uint256 _amountOut
+            address _tokenOut
         )
     {
         return
             abi.decode(
                 (abi.encodePacked(_encodedSwap)),
-                (address, address, uint256, uint256)
+                (uint256, uint256, uint256, bytes8, bytes8, address, address)
             );
     }
 }
