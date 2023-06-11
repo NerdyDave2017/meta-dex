@@ -2,35 +2,10 @@
 pragma solidity 0.8.18;
 
 contract MetaDexState {
-    address[] tokens;
-    mapping(address => bool) public isToken;
+    uint256 minimumLockDuration = 30 * 1 days;
+    uint256 minimumAmount = 1000 * 10 ** 8; // token decimals will be in 10 ** 8
 
-    // Tokens to pool
-
-    constructor() {}
-
-    function addToken(address _token) external {
-        require(_token != address(0), "Token cannot be empty address");
-        require(!isToken[_token], "Token already exists");
-        tokens.push(_token);
-        isToken[_token] = true;
-    }
-
-    function removeToken(address _token) external {
-        require(_token != address(0), "Token cannot be empty address");
-        require(isToken[_token], "Token does not exist");
-
-        _removeTokenFromArray(_token);
-        isToken[_token] = false;
-    }
-
-    function _removeTokenFromArray(address _token) internal {
-        for (uint256 i = 0; i < tokens.length; i++) {
-            if (tokens[i] == _token) {
-                tokens[i] = tokens[tokens.length - 1];
-                tokens.pop();
-                break;
-            }
-        }
-    }
+    mapping(address => bool) isLiquidityProvider; // Address of LPs
+    mapping(address => uint256) lockedAmount; // Amount locked in the pool by LPs
+    mapping(address => uint256) lockDuration; // Lock duration of each lp
 }

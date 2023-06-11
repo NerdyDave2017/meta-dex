@@ -5,10 +5,15 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "../utils/MetaDexHelpers.sol";
 import "../utils/MetaDexState.sol";
 
-contract MetaDexSwap is MetaDexHelpers, MetaDexState {
+contract MetaDexSwap is MetaDexHelpers {
     // On chain pools
+    IERC20 USDT_POOL;
+    IERC20 USDC_POOL;
 
-    constructor() {}
+    constructor(address _usdt, address _usdc) {
+        USDT_POOL = IERC20(_usdt);
+        USDC_POOL = IERC20(_usdc);
+    }
 
     /**
      * @notice Execute a swap
@@ -45,6 +50,7 @@ contract MetaDexSwap is MetaDexHelpers, MetaDexState {
             address _tokenIn,
 
         ) = _decodeSwapData(_encodedSwap);
+
         // Transfer funds from user to MetaDexPool contract for tokenIn
 
         // Execute swap
