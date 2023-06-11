@@ -21,4 +21,23 @@ contract MetaDexHelpers {
             _signer ==
             ecrecover(keccak256(abi.encodePacked(_encodedSwap)), v, r, s);
     }
+
+    function _decodeSwapData(
+        uint256 _encodedSwap
+    )
+        internal
+        pure
+        returns (
+            address _tokenIn,
+            address _tokenOut,
+            uint256 _amountIn,
+            uint256 _amountOut
+        )
+    {
+        return
+            abi.decode(
+                (abi.encodePacked(_encodedSwap)),
+                (address, address, uint256, uint256)
+            );
+    }
 }

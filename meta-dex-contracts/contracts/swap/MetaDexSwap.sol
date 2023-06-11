@@ -2,23 +2,20 @@
 pragma solidity 0.8.18;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "../utils/MetaDexHelpers.sol";
+import "../utils/MetaDexState.sol";
 
-contract MetaDexSwap {
+contract MetaDexSwap is MetaDexHelpers, MetaDexState {
     // On chain pools
-    IERC20 USDT_POOL;
-    IERC20 USDC_POOL;
 
-    constructor(address _usdtPool, address _usdcPool) {
-        USDT_POOL = IERC20(_usdtPool);
-        USDC_POOL = IERC20(_usdcPool);
-    }
+    constructor() {}
 
     /**
      * @notice Execute a swap
      * Funtion verifies signature then extracts swap data from _encodedSwap
      * It uses the data to determine which pool to send funds to
      * User must have approved the MetaDexSwap contract to spend their funds
-     * @dev This function is called by the MetaDexRouter contract
+     * @dev This function is called by the Relayer contract
      * @param _encodedSwap contains all the information needed to execute the swap
      * @param r r value of the swap signature
      * @param s s value of the swap signature
@@ -34,8 +31,7 @@ contract MetaDexSwap {
     ) external {
         // Verify signature
         require(
-            _signer ==
-                ecrecover(keccak256(abi.encodePacked(_encodedSwap)), v, r, s),
+            _verifySignature(_encodedSwap, r, s, v, _signer),
             "MetaDexSwap: Invalid signature"
         );
 
@@ -55,12 +51,7 @@ contract MetaDexSwap {
         IERC20(_tokenIn).transferFrom(_signer, address(this), _amountIn);
 
         // Execute swap
-        if (_tokenIn == address(USDT_POOL)) {
-            USDT_POOL.transfer(_tokenOut, _amountOut);
-        } else if (_tokenIn == address(USDC_POOL)) {
-            USDC_POOL.transfer(_tokenOut, _amountOut);
-        } else {
-            revert("MetaDexSwap: Invalid tokenIn");
-        }
+        // Check MetaDexState to see if pool exists
+        // If pool exists, execute swap
     }
 }
