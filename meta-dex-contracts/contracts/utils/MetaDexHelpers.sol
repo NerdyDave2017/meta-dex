@@ -2,7 +2,7 @@
 pragma solidity 0.8.18;
 
 contract MetaDexHelpers {
-    function _verifySignature(
+    function _verifyReleaseSignature(
         uint256 _encodedSwap,
         bytes32 r,
         bytes32 s,
@@ -42,5 +42,12 @@ contract MetaDexHelpers {
                 (abi.encodePacked(_encodedSwap)),
                 (uint256, uint256, uint256, bytes8, bytes8, address, address)
             );
+    }
+
+    function _getSwapId(
+        uint256 encodedSwap,
+        address initiator
+    ) internal pure returns (bytes32) {
+        return keccak256(abi.encodePacked(encodedSwap, initiator));
     }
 }

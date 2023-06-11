@@ -4,16 +4,32 @@ pragma solidity 0.8.18;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 import "../utils/MetaDexState.sol";
+import "../utils/MetaDexHelpers.sol";
+import "../Admin/MetaDexAdmin.sol";
 
-contract MetaDexPool is MetaDexState, Context {
-    IERC20 immutable token;
+contract MetaDexPool is MetaDexState, MetaDexHelpers, Context {
+    IERC20 public immutable token;
     string private name;
+    MetaDexAdmin ADMIN;
+
+    mapping(bytes32 => uint80) internal _lockedSwaps;
+
+    // modifiers
+    modifier onlyAdmin() {
+        require(ADMIN.isAdmin(msg.sender), "MetaDexSwap: Not admin");
+        _;
+    }
 
     constructor(address _token, string memory _name) {
         token = IERC20(_token);
         name = _name;
     }
 
+    function checkAdmin(address _admin) external view returns (bool) {
+        return ADMIN.isAdmin(_admin);
+    }
+
+    //// Functions for LPs ////
     // Register, deposit and lock funds in pool
     function registerAndDeposit(
         uint256 _amount,
@@ -53,6 +69,7 @@ contract MetaDexPool is MetaDexState, Context {
         require(token.transfer(address(this), _amount), "Transaction failed");
     }
 
+    //// Functions for MetaDexSwap ////
     // Lock on target chain on swap request
     function lock(
         uint256 _encodedSwap,
@@ -79,7 +96,6 @@ contract MetaDexPool is MetaDexState, Context {
         bytes32 s,
         uint8 v,
         address _initiator,
-        address _recipient,
-        bytes32 swapId
+        address _recipient
     ) external {}
 }
