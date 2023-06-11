@@ -34,5 +34,22 @@ contract MetaDexPool is MetaDexState, Context {
         isLiquidityProvider[liquidityProvider] = true;
         lockedAmount[liquidityProvider] = _amount;
         lockDuration[liquidityProvider] = _lockDuration;
+
+        require(token.transfer(address(this), _amount), "Transaction failed");
+    }
+
+    // Deposit when already registered
+    function deposit(uint256 _amount) external {
+        address liquidityProvider = _msgSender();
+        require(
+            isLiquidityProvider[liquidityProvider] == true,
+            "Already not registered"
+        );
+        require(lockedAmount[liquidityProvider] > 0, "Already not registered");
+        require(_amount >= minimumAmount, "Amount too small");
+
+        lockedAmount[liquidityProvider] += _amount;
+
+        require(token.transfer(address(this), _amount), "Transaction failed");
     }
 }
